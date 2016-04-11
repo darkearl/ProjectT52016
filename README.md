@@ -3,7 +3,7 @@ Installation
 
 ## Web Server Environment
 
-The minimum requirement by this project template is that your Web server supports PHP 5.4.0. (we recommend version 5.6 for CS-Cart and Multi-Vendor 4.3.x)
+The minimum requirement by this project template is that your Web server supports PHP 5.4.0. (we recommend version 5.6 for CS-Cart and Multi-Vendor 4.3.x)<br>
 MySQL version 4.1 or higher (MySQLi or pdo_mysql should be supported)
 
 ## Server Configuration Requirements
