@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<addon scheme="2.0">
+    <id>products_near_me</id>
+    <name>Products near me</name>
+    <description>Lets you place local products on map and inform customers about their nearest products</description>
+    <version>1.0</version>
+    <priority>1200</priority>
+    <position>10</position>
+    <status>active</status>
+    <default_language>en</default_language>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <settings>
+        <sections>
+            <section id="general">
+                <items>
+                    <item id="provider">
+                        <type>header</type>
+                        <name>Map provider</name>
+                    </item>
+                    <item id="map_provider">
+                        <name>Map</name>
+                        <type>selectbox</type>
+                        <default_value>google</default_value>
+                        <variants>
+                            <item id="google">
+                                <name>google</name>
+                            </item>
+                        </variants>
+                    </item>
+                    <item id="settings">
+                        <type>header</type>
+                        <name>Settings</name>
+                    </item>
+                    <item id="store_locator_settings">
+                        <type>template</type>
+                        <default_value>map_provider_settings.tpl</default_value>
+                    </item>
+                </items>
+            </section>
+        </sections>
+    </settings>
+    <language_variables>
+        <item lang="en" id="products_near_me">Products near me</item>
+        <item lang="en" id="products_near_me_locale">Locale</item>
+        <item lang="en" id="block_products_near_me">Products near me</item>
+    </language_variables>
+    <queries>
+        <item>DROP TABLE IF EXISTS `?:products_near_me`;</item>
+        <item>DROP TABLE IF EXISTS `?:products_near_me_descriptions`;</item>
+        <item>
+            CREATE TABLE `?:products_near_me` (
+                `product_id` mediumint(8) unsigned NOT NULL,
+                `country` char(2) NOT NULL default '',
+                `latitude` double NOT NULL default '0',
+                `longitude` double NOT NULL default '0',
+                `localization` varchar(255) NOT NULL default '',
+                `status` char(1) NOT NULL default 'A',
+                PRIMARY KEY  (`product_id`),
+                KEY `status` (`status`)
+            ) ENGINE=MyISAM DEFAULT CHARSET UTF8;
+        </item>
+        <item>
+            CREATE TABLE `?:products_near_me_descriptions` (
+                `product_id` mediumint(8) unsigned NOT NULL,
+                `lang_code` char(2) NOT NULL default '',
+                `name` varchar(80) NOT NULL default '',
+                `description` mediumtext,
+                `city` varchar(60) NOT NULL default '',
+                PRIMARY KEY  (`product_id`,`lang_code`)
+            ) ENGINE=MyISAM DEFAULT CHARSET UTF8;
+        </item>
+        <item for="uninstall">DROP TABLE IF EXISTS `?:products_near_me`;</item>
+        <item for="uninstall">DROP TABLE IF EXISTS `?:products_near_me_descriptions`;</item>
+    </queries>
+</addon>
